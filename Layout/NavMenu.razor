@@ -1,0 +1,22 @@
+@* ── Menu de navigation latéral ──────────────────────────────
+   NavLink : comme <a> mais ajoute la classe "active" sur
+   l'URL courante. Match.All = actif uniquement sur "/" exact. *@
+@inject AuthService AuthService
+@inject NavigationManager Nav
+
+<nav>
+    <NavLink href="/"       Match="NavLinkMatch.All">ACCUEIL</NavLink>
+    <NavLink href="pokedex">POKÉDEX</NavLink>
+    <NavLink href="favoris">FAVORIS</NavLink>
+    <button @onclick="Deconnexion">DÉCONNEXION</button>
+</nav>
+
+@code {
+    // Les guillemets imbriqués dans @onclick inline causent une erreur RZ1030
+    // → on déplace la logique dans une méthode @code
+    async Task Deconnexion()
+    {
+        await AuthService.Logout();
+        Nav.NavigateTo("/login");
+    }
+}

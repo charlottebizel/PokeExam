@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="192" height="192" style="image-rendering: pixelated;">
+    <style>
+        .darkest { fill: #1F1F1F; }
+        .dark { fill: #4D533C; }
+        .light { fill: #8B956D; }
+        .lightest { fill: #C4CFA1; }
+    </style>
+    <!-- Hat Back -->
+    <path class="darkest" d="M14 10h20v1h-20z M13 11h22v1h-22z M12 12h24v1h-24z"/>
+    <!-- Hat Front -->
+    <path class="dark" d="M14 13h20v1h-20z M15 14h18v1h-18z"/>
+    <!-- Hat Logo -->
+    <path class="lightest" d="M22 13h4v1h-4z"/>
+    <path class="light" d="M23 13h2v1h-2z"/>
+    <!-- Hair -->
+    <path class="darkest" d="M11 13h1v5h-1z M12 14h1v3h-1z M36 13h1v5h-1z M35 14h1v3h-1z M12 18h2v1h-2z M34 18h2v1h-2z"/>
+    <!-- Face -->
+    <path class="lightest" d="M12 13h2v1h-2z M34 13h2v1h-2z M13 14h2v3h-2z M33 14h2v3h-2z M15 15h1v2h-1z M32 15h1v2h-1z M16 15h6v1h-6z M28 15h4v1h-4z M15 17h18v1h-18z"/>
+    <path class="darkest" d="M18 16h2v1h-2z M28 16h2v1h-2z"/>
+    <!-- Jacket Body -->
+    <path class="dark" d="M15 18h18v10h-18z"/>
+    <!-- Jacket Collar & Trim -->
+    <path class="lightest" d="M15 18h2v2h-2z M31 18h2v2h-2z M17 18h14v1h-14z M16 27h16v1h-16z"/>
+    <path class="darkest" d="M14 19h1v8h-1z M33 19h1v8h-1z M15 28h18v1h-18z M16 29h16v1h-16z"/>
+    <!-- Arms -->
+    <path class="light" d="M12 19h2v7h-2z M34 19h2v7h-2z"/>
+    <path class="lightest" d="M12 19h2v1h-2z M34 19h2v1h-2z"/>
+    <!-- Pants -->
+    <path class="light" d="M16 30h16v6h-16z"/>
+    <!-- Shoes -->
+    <path class="darkest" d="M14 36h6v2h-6z M28 36h6v2h-6z"/>
+</svg>

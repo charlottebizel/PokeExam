@@ -1,0 +1,55 @@
+@* ── Page d'accueil ───────────────────────────────────────────
+   Redirige automatiquement vers /login si non connecté        *@
+@page "/"
+@implements IDisposable
+@inject AuthService AuthService
+@inject NavigationManager Nav
+
+<div class="gb-screen-wrapper">
+    <div class="gb-header"><span class="gb-pixel-title">★ BIENVENUE ★</span></div>
+    <div class="gb-home">
+        <img src="images/pokeball.svg" alt="Pokeball" class="pokeball-home" />
+        <h2 class="gb-home-title">POKÉEXAM</h2>
+        <p>
+            <span class="typewriter-text">@displayedText</span>
+            <br />
+            FAIT AVEC BLAZOR
+        </p>
+        <button class="gb-btn gb-btn-primary" @onclick='() => Nav.NavigateTo("/pokedex")'>▶ JOUER</button>
+    </div>
+</div>
+
+@code {
+    private const string FullText = "MON POKÉDEX";
+    private string displayedText = "";
+    private CancellationTokenSource cts = new CancellationTokenSource();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!await AuthService.IsAuthenticated())
+        {
+            Nav.NavigateTo("/login");
+        }
+        else
+        {
+            await StartTypewriterEffect(cts.Token);
+        }
+    }
+
+    private async Task StartTypewriterEffect(CancellationToken token)
+    {
+        foreach (char c in FullText)
+        {
+            if (token.IsCancellationRequested) break;
+            displayedText += c;
+            StateHasChanged();
+            await Task.Delay(150, token); // Adjust delay for typing speed
+        }
+    }
+
+    public void Dispose()
+    {
+        cts.Cancel();
+        cts.Dispose();
+    }
+}

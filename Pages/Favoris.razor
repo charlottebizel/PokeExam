@@ -1,0 +1,110 @@
+@* ── Page Favoris — CRUD complet ─────────────────────────────
+   Liste / Modifier commentaire / Supprimer avec confirmation  *@
+@page "/favoris"
+@inject FavoriService  FavoriService
+@inject AuthService    AuthService
+@inject NavigationManager Nav
+
+<div class="gb-screen-wrapper">
+    <div class="gb-header"><span class="gb-pixel-title">★ MES FAVORIS ★</span></div>
+
+    @if (!favoris.Any())
+    {
+        <div class="gb-empty">
+            <div class="gb-empty-icon">◯</div>
+            <p>AUCUN FAVORI</p>
+            <p class="gb-sub">RECHERCHE UN POKÉMON !</p>
+        </div>
+    }
+    else
+    {
+        <div class="gb-favori-list">
+        @foreach (var f in favoris)
+        {
+            <div class="gb-favori-card @(editId == f.Id ? "editing" : "")">
+                <div class="gb-favori-top">
+                    @* Affiche le sprite s'il existe, sinon un placeholder *@
+                    @if (f.ImageUrl != null)
+                        { <img class="gb-favori-img" src="@f.ImageUrl" alt="@f.NomPokemon" /> }
+                    else
+                        { <div class="gb-favori-img-placeholder">?</div> }
+
+                    <div class="gb-favori-info">
+                        <span class="gb-favori-name">@f.NomPokemon.ToUpper()</span>
+                        <span class="gb-favori-id">N°@f.Id</span>
+                    </div>
+                    <div class="gb-favori-actions">
+                        <button class="gb-btn gb-btn-edit"   @onclick="() => StartEdit(f)">✎</button>
+                        <button class="gb-btn gb-btn-delete" @onclick="() => { deleteId = f.Id; showModal = true; }">✕</button>
+                    </div>
+                </div>
+
+                @* Zone d'édition visible seulement pour la carte en cours d'édition *@
+                @if (editId == f.Id)
+                {
+                    <div class="gb-edit-zone">
+                        <label class="gb-label">COMMENTAIRE :</label>
+                        <input class="gb-input" @bind="editCommentaire" placeholder="Ton avis..." maxlength="100" />
+                        <div class="gb-edit-btns">
+                            <button class="gb-btn gb-btn-save"   @onclick="SaveEdit">✔ SAUVER</button>
+                            <button class="gb-btn gb-btn-cancel" @onclick="() => editId = null">✕ ANNULER</button>
+                        </div>
+                    </div>
+                }
+                else if (f.Commentaire != null)
+                {
+                    <div class="gb-comment">💬 @f.Commentaire</div>
+                }
+            </div>
+        }
+        </div>
+    }
+
+    @* Modal de confirmation de suppression *@
+    @if (showModal)
+    {
+        <div class="gb-modal-overlay">
+            <div class="gb-modal">
+                <p class="gb-modal-text">SUPPRIMER CE FAVORI ?</p>
+                <div class="gb-modal-btns">
+                    <button class="gb-btn gb-btn-delete" @onclick="ExecuteDelete">OUI</button>
+                    <button class="gb-btn gb-btn-cancel" @onclick="() => showModal = false">NON</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    List<Favori> favoris = new();   // Liste des favoris chargée depuis localStorage
+    int?   editId          = null;  // Id du favori en cours d'édition (null = aucun)
+    string editCommentaire = "";    // Valeur temporaire du champ commentaire
+    bool   showModal       = false; // Affiche/cache la modale de confirmation
+    int    deleteId        = 0;     // Id du favori à supprimer
+
+    // Charge les favoris au démarrage (et redirige si non connecté)
+    protected override async Task OnInitializedAsync()
+    {
+        if (!await AuthService.IsAuthenticated()) { Nav.NavigateTo("/login"); return; }
+        favoris = await FavoriService.GetAll();
+    }
+
+    // Ouvre le mode édition pour un favori donné
+    void StartEdit(Favori f) { editId = f.Id; editCommentaire = f.Commentaire ?? ""; }
+
+    // Sauvegarde le commentaire modifié
+    async Task SaveEdit()
+    {
+        var f = favoris.FirstOrDefault(x => x.Id == editId);
+        if (f != null) { f.Commentaire = editCommentaire; await FavoriService.Update(f); }
+        editId = null; // Ferme le mode édition
+    }
+
+    // Supprime le favori et rafraîchit la liste
+    async Task ExecuteDelete()
+    {
+        await FavoriService.Delete(deleteId);
+        showModal = false;
+        favoris   = await FavoriService.GetAll(); // Recharge la liste
+    }
+}

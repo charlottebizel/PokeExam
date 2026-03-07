@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokéexam</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <base href="/" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="icon" type="image/jpeg" href="pokeball.jpg" />
+    <link href="PokeBlazor.styles.css" rel="stylesheet" />
+
+    <style>
+        /* Styles pour l'écran de chargement initial */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Press Start 2P', monospace;
+        }
+
+        #app {
+            background-color: #C4CFA1; /* --gb-lightest from app.css */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .loader-text {
+            color: #4D533C; /* --gb-dark from app.css */
+            font-size: 10px;
+            letter-spacing: 2px;
+            margin-top: 20px;
+        }
+        
+        .loader-img {
+            width: 120px; /* Taille ajustée pour la pokeball */
+            height: 120px;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <img src="images/pokeball.svg" alt="Loading..." class="loader-img" />
+        <div class="loader-text">LOADING...</div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+
+</html>

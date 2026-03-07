@@ -1,0 +1,44 @@
+@* ── Page de connexion ────────────────────────────────────────
+   Layout vide (EmptyLayout) : pas de sidebar sur cette page
+   @bind relie la variable C# à la valeur de l'input (2 sens)  *@
+@page "/login"
+@layout PokeBlazor.Layout.EmptyLayout
+@inject AuthService AuthService
+@inject NavigationManager Nav
+
+<div class="gb-login-wrapper">
+    <div class="gb-login-box">
+        <h1 class="gb-login-title">POKÉEXAM</h1>
+        <p class="gb-login-sub">▶ APPUIE SUR START</p>
+
+        <div class="gb-form-group">
+            <label class="gb-label">DRESSEUR :</label>
+            <input class="gb-input" @bind="username" placeholder="VOTRE NOM..." />
+        </div>
+        <div class="gb-form-group">
+            <label class="gb-label">MOT DE PASSE :</label>
+            <input class="gb-input" type="password" @bind="password" @onkeydown="HandleKey" placeholder="••••••••" />
+        </div>
+
+        @if (error) { <div class="gb-error">⚠ REMPLIS LES CHAMPS !</div> }
+
+        <button class="gb-btn gb-login-btn" @onclick="HandleLogin">▶ START</button>
+    </div>
+</div>
+
+@code {
+    string username = "", password = "";
+    bool error = false;
+
+    // Permet de valider avec la touche Entrée
+    async Task HandleKey(KeyboardEventArgs e) { if (e.Key == "Enter") await HandleLogin(); }
+
+    async Task HandleLogin()
+    {
+        if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            { error = true; return; }
+
+        await AuthService.Login(username, password);
+        Nav.NavigateTo("/pokedex"); // Redirige vers le Pokédex après connexion
+    }
+}

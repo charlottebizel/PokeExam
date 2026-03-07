@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokeBlazor", "PokeBlazor.csproj", "{8E45C45A-7A05-DFE8-F9D2-20248DA662BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E45C45A-7A05-DFE8-F9D2-20248DA662BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E45C45A-7A05-DFE8-F9D2-20248DA662BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E45C45A-7A05-DFE8-F9D2-20248DA662BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E45C45A-7A05-DFE8-F9D2-20248DA662BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6249FE73-F0B0-4ED7-A1DF-4AC307246D3F}
+	EndGlobalSection
+EndGlobal

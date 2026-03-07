@@ -1,0 +1,180 @@
+@page "/pokedex"
+@implements IDisposable
+@inject PokemonService PokemonService
+@inject FavoriService  FavoriService
+@inject AuthService    AuthService
+@inject NavigationManager Nav
+
+<div class="gb-screen-wrapper">
+    <div class="gb-header"><span class="gb-pixel-title">★ POKÉDEX ★</span></div>
+
+    @* Barre de recherche — @onkeydown permet de valider avec Entrée *@
+    <div class="gb-search-zone">
+        <input class="gb-input" @bind="nom" @bind:event="oninput"
+               @onkeydown="HandleKey" placeholder="NOM DU POKÉMON..." />
+        <button class="gb-btn gb-btn-primary" @onclick="Chercher">▶ GO</button>
+    </div>
+
+    @if (chargement) { <div class="gb-loading"><img src="images/pokeball.svg" alt="Chargement..." class="pokeball-loading" /></div> }
+    @if (erreur != "") { <div class="gb-error">⚠ @erreur</div> }
+
+    @if (pokemon != null)
+    {
+        <div class="gb-pokemon-card">
+            <div class="gb-pokemon-header">
+                <span class="gb-pokemon-name">@pokemon.Name.ToUpper()</span>
+                @* Bouton favori : change d'apparence selon l'état *@
+                <button class="gb-btn @(estFavori ? "gb-btn-fav-active" : "gb-btn-fav")" @onclick="BasculerFavori">
+                    @(estFavori ? "★ FAVORI" : "☆ FAVORI")
+                </button>
+            </div>
+            <div class="gb-pokemon-body">
+                <div class="gb-sprite-box">
+                    <img class="gb-sprite" src="@pokemon.Sprites.FrontDefault" alt="@pokemon.Name" />
+                </div>
+                <div class="gb-pokemon-details">
+                    <div class="gb-info-row"><span class="gb-label">TAILLE</span><span class="gb-value">@((pokemon.Height/10.0).ToString("F1")) m</span></div>
+                    <div class="gb-info-row"><span class="gb-label">POIDS</span> <span class="gb-value">@((pokemon.Weight/10.0).ToString("F1")) kg</span></div>
+                    <div class="gb-types">
+                        @* TypeFr traduit le nom de type anglais → français *@
+                        @foreach (var t in pokemon.Types)
+                        { <span class="gb-type-badge gb-type-@t.Type.Name">@TypeFr.GetValueOrDefault(t.Type.Name, t.Type.Name)</span> }
+                    </div>
+                </div>
+            </div>
+            @if (!string.IsNullOrEmpty(pokemon.Description))
+            {
+                <div class="gb-comment typewriter-container @(isTyping ? "typing-active" : "")" style="margin-top: 12px; border-top: 2px solid var(--gb-dark); padding-top: 12px; text-align: justify; line-height: 1.5;">
+                    <span class="gb-comment-icon">▶</span> @displayedDescription
+                </div>
+            }
+            <div class="gb-stats">
+                <p class="gb-label">— STATS —</p>
+                @foreach (var s in pokemon.Stats)
+                {
+                    <div class="gb-stat-row">
+                        <span class="gb-stat-name">@StatFr.GetValueOrDefault(s.Stat.Name, s.Stat.Name)</span>
+                        <div class="gb-stat-bar-bg"><div class="gb-stat-bar" style="width:@(Math.Min(s.BaseStat*100/255,100))%"></div></div>
+                        <span class="gb-stat-val">@s.BaseStat</span>
+                    </div>
+                }
+            </div>
+            @if (notif != "") { <div class="gb-notif @(estFavori ? "gb-notif-add" : "gb-notif-remove")">@notif</div> }
+        </div>
+    }
+</div>
+
+@code {
+    // ── État du composant ──────────────────────────────────────
+    Pokemon? pokemon;
+    string   nom       = "";
+    string   erreur    = "";
+    string   notif     = "";
+    bool     chargement = false;
+    bool     estFavori  = false;
+
+    // --- État pour l'effet machine à écrire ---
+    private string displayedDescription = "";
+    private CancellationTokenSource typewriterCts = new();
+    private bool isTyping = false;
+
+    // ── Traductions anglais → français ────────────────────────
+    static readonly Dictionary<string, string> TypeFr = new()
+    {
+        ["grass"]="Plante",["fire"]="Feu",["water"]="Eau",["electric"]="Électrique",
+        ["poison"]="Poison",["psychic"]="Psy",["rock"]="Roche",["ground"]="Sol",
+        ["ice"]="Glace",["dragon"]="Dragon",["fairy"]="Fée",["normal"]="Normal",
+        ["fighting"]="Combat",["flying"]="Vol",["bug"]="Insecte",["ghost"]="Spectre",
+        ["dark"]="Ténèbres",["steel"]="Acier"
+    };
+    static readonly Dictionary<string, string> StatFr = new()
+    {
+        ["hp"]="PV",["attack"]="ATQ",["defense"]="DEF",
+        ["special-attack"]="ATQ.SP",["special-defense"]="DEF.SP",["speed"]="VIT"
+    };
+
+    // ── Cycle de vie ───────────────────────────────────────────
+    protected override async Task OnInitializedAsync()
+    {
+        if (!await AuthService.IsAuthenticated()) Nav.NavigateTo("/login");
+    }
+
+    public void Dispose()
+    {
+        typewriterCts.Cancel();
+        typewriterCts.Dispose();
+    }
+
+    async Task HandleKey(KeyboardEventArgs e) { if (e.Key == "Enter") await Chercher(); }
+
+    // ── Recherche d'un Pokémon ─────────────────────────────────
+    async Task Chercher()
+    {
+        if (string.IsNullOrWhiteSpace(nom)) { erreur = "ENTRE UN NOM !"; return; }
+
+        erreur = ""; pokemon = null; chargement = true; StateHasChanged();
+
+        // Annule l'animation de texte précédente
+        typewriterCts.Cancel();
+        typewriterCts.Dispose();
+        typewriterCts = new CancellationTokenSource();
+
+        pokemon = await PokemonService.GetPokemon(nom.Trim());
+        erreur  = pokemon == null ? "POKÉMON INTROUVABLE." : "";
+
+        if (pokemon != null)
+        {
+            estFavori = await FavoriService.IsFavori(pokemon.Name);
+            // Démarre la nouvelle animation
+            _ = StartTypewriterEffect(pokemon.Description, typewriterCts.Token);
+        }
+
+        chargement = false;
+    }
+
+    async Task StartTypewriterEffect(string fullText, CancellationToken token)
+    {
+        displayedDescription = "";
+        isTyping = true;
+        StateHasChanged();
+
+        foreach (char c in fullText)
+        {
+            if (token.IsCancellationRequested)
+            {
+                isTyping = false;
+                StateHasChanged();
+                return;
+            }
+            displayedDescription += c;
+            StateHasChanged();
+            await Task.Delay(30, token); // Vitesse d'écriture
+        }
+
+        isTyping = false;
+        StateHasChanged();
+    }
+
+
+    // ── Ajouter / retirer des favoris ─────────────────────────
+    async Task BasculerFavori()
+    {
+        if (pokemon == null) return;
+
+        if (estFavori)
+        {
+            var all  = await FavoriService.GetAll();
+            var fav  = all.FirstOrDefault(f => f.NomPokemon.ToLower() == pokemon.Name.ToLower());
+            if (fav != null) await FavoriService.Delete(fav.Id);
+            notif = "RETIRÉ DES FAVORIS"; estFavori = false;
+        }
+        else
+        {
+            await FavoriService.Add(new Favori { NomPokemon = pokemon.Name, ImageUrl = pokemon.Sprites.FrontDefault });
+            notif = "AJOUTÉ AUX FAVORIS !"; estFavori = true;
+        }
+
+        await Task.Delay(2000);
+        notif = ""; StateHasChanged();
+    }
+}

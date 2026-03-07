@@ -1,0 +1,15 @@
+@* ── Routeur principal ────────────────────────────────────────
+   Le Router lit l'URL et cherche un composant avec @page
+   correspondant. DefaultLayout s'applique à toutes les pages
+   qui ne spécifient pas leur propre @layout.                  *@
+<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(MainLayout)">
+            <p>PAGE INTROUVABLE.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
