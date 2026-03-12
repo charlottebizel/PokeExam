@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bizel\\Desktop\\cha\\BACH\\2ième\\POO\\examen\\PokeBlazor (bug)\\PokeBlazor.csproj": {}
+    "C:\\Users\\bizel\\Desktop\\cha\\BACH\\2ième\\POO\\examen\\PokeExam\\PokeBlazor.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bizel\\Desktop\\cha\\BACH\\2ième\\POO\\examen\\PokeBlazor (bug)\\PokeBlazor.csproj": {
+    "C:\\Users\\bizel\\Desktop\\cha\\BACH\\2ième\\POO\\examen\\PokeExam\\PokeBlazor.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bizel\\Desktop\\cha\\BACH\\2ième\\POO\\examen\\PokeBlazor (bug)\\PokeBlazor.csproj",
+        "projectUniqueName": "C:\\Users\\bizel\\Desktop\\cha\\BACH\\2ième\\POO\\examen\\PokeExam\\PokeBlazor.csproj",
         "projectName": "PokeBlazor",
-        "projectPath": "C:\\Users\\bizel\\Desktop\\cha\\BACH\\2ième\\POO\\examen\\PokeBlazor (bug)\\PokeBlazor.csproj",
+        "projectPath": "C:\\Users\\bizel\\Desktop\\cha\\BACH\\2ième\\POO\\examen\\PokeExam\\PokeBlazor.csproj",
         "packagesPath": "C:\\Users\\bizel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bizel\\Desktop\\cha\\BACH\\2ième\\POO\\examen\\PokeBlazor (bug)\\obj\\",
+        "outputPath": "C:\\Users\\bizel\\Desktop\\cha\\BACH\\2ième\\POO\\examen\\PokeExam\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\bizel\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -52,7 +52,7 @@
             "Microsoft.AspNetCore.App.Internal.Assets": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.3, )",
+              "version": "[10.0.4, )",
               "autoReferenced": true
             },
             "Microsoft.AspNetCore.Components.WebAssembly": {
@@ -66,13 +66,13 @@
             },
             "Microsoft.DotNet.HotReload.WebAssembly.Browser": {
               "target": "Package",
-              "version": "[10.0.103, )",
+              "version": "[10.0.104, )",
               "autoReferenced": true
             },
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.3, )",
+              "version": "[10.0.4, )",
               "autoReferenced": true
             },
             "Microsoft.NET.Sdk.WebAssembly.Pack": {
@@ -108,7 +108,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.104/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

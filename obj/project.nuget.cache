@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "d1it/0o4MEY=",
+  "dgSpecHash": "tm29K9Lk/aM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\bizel\\Desktop\\cha\\BACH\\2ième\\POO\\examen\\PokeBlazor (bug)\\PokeBlazor.csproj",
+  "projectFilePath": "C:\\Users\\bizel\\Desktop\\cha\\BACH\\2ième\\POO\\examen\\PokeExam\\PokeBlazor.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bizel\\.nuget\\packages\\blazored.localstorage\\4.3.0\\blazored.localstorage.4.3.0.nupkg.sha512",
-    "C:\\Users\\bizel\\.nuget\\packages\\microsoft.aspnetcore.app.internal.assets\\10.0.3\\microsoft.aspnetcore.app.internal.assets.10.0.3.nupkg.sha512",
+    "C:\\Users\\bizel\\.nuget\\packages\\microsoft.aspnetcore.app.internal.assets\\10.0.4\\microsoft.aspnetcore.app.internal.assets.10.0.4.nupkg.sha512",
     "C:\\Users\\bizel\\.nuget\\packages\\microsoft.aspnetcore.authorization\\10.0.3\\microsoft.aspnetcore.authorization.10.0.3.nupkg.sha512",
     "C:\\Users\\bizel\\.nuget\\packages\\microsoft.aspnetcore.components\\10.0.3\\microsoft.aspnetcore.components.10.0.3.nupkg.sha512",
     "C:\\Users\\bizel\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\10.0.3\\microsoft.aspnetcore.components.analyzers.10.0.3.nupkg.sha512",
@@ -14,7 +14,7 @@
     "C:\\Users\\bizel\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly\\10.0.3\\microsoft.aspnetcore.components.webassembly.10.0.3.nupkg.sha512",
     "C:\\Users\\bizel\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.devserver\\10.0.3\\microsoft.aspnetcore.components.webassembly.devserver.10.0.3.nupkg.sha512",
     "C:\\Users\\bizel\\.nuget\\packages\\microsoft.aspnetcore.metadata\\10.0.3\\microsoft.aspnetcore.metadata.10.0.3.nupkg.sha512",
-    "C:\\Users\\bizel\\.nuget\\packages\\microsoft.dotnet.hotreload.webassembly.browser\\10.0.103\\microsoft.dotnet.hotreload.webassembly.browser.10.0.103.nupkg.sha512",
+    "C:\\Users\\bizel\\.nuget\\packages\\microsoft.dotnet.hotreload.webassembly.browser\\10.0.104\\microsoft.dotnet.hotreload.webassembly.browser.10.0.104.nupkg.sha512",
     "C:\\Users\\bizel\\.nuget\\packages\\microsoft.extensions.configuration\\10.0.3\\microsoft.extensions.configuration.10.0.3.nupkg.sha512",
     "C:\\Users\\bizel\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\10.0.3\\microsoft.extensions.configuration.abstractions.10.0.3.nupkg.sha512",
     "C:\\Users\\bizel\\.nuget\\packages\\microsoft.extensions.configuration.binder\\10.0.3\\microsoft.extensions.configuration.binder.10.0.3.nupkg.sha512",
@@ -35,7 +35,7 @@
     "C:\\Users\\bizel\\.nuget\\packages\\microsoft.extensions.validation\\10.0.3\\microsoft.extensions.validation.10.0.3.nupkg.sha512",
     "C:\\Users\\bizel\\.nuget\\packages\\microsoft.jsinterop\\10.0.3\\microsoft.jsinterop.10.0.3.nupkg.sha512",
     "C:\\Users\\bizel\\.nuget\\packages\\microsoft.jsinterop.webassembly\\10.0.3\\microsoft.jsinterop.webassembly.10.0.3.nupkg.sha512",
-    "C:\\Users\\bizel\\.nuget\\packages\\microsoft.net.illink.tasks\\10.0.3\\microsoft.net.illink.tasks.10.0.3.nupkg.sha512",
+    "C:\\Users\\bizel\\.nuget\\packages\\microsoft.net.illink.tasks\\10.0.4\\microsoft.net.illink.tasks.10.0.4.nupkg.sha512",
     "C:\\Users\\bizel\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\10.0.0\\microsoft.net.sdk.webassembly.pack.10.0.0.nupkg.sha512",
     "C:\\Users\\bizel\\.nuget\\packages\\microsoft.netcore.app.ref\\10.0.0\\microsoft.netcore.app.ref.10.0.0.nupkg.sha512",
     "C:\\Users\\bizel\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\10.0.0\\microsoft.netcore.app.runtime.mono.browser-wasm.10.0.0.nupkg.sha512"
