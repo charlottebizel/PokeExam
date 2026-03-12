@@ -8,15 +8,25 @@ using PokeBlazor.Models;
 
 namespace PokeBlazor.Services;
 
+/// <summary>
+/// Provides CRUD (Create, Read, Update, Delete) operations for favorite Pokémon using local storage.
+/// </summary>
 public class FavoriService(ILocalStorageService ls)
 {
     const string KEY = "favoris";
 
-    // Lit la liste depuis le localStorage (retourne liste vide si absente)
+    /// <summary>
+    /// Retrieves the list of all favorite Pokémon from local storage.
+    /// </summary>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the list of favorites, or an empty list if none are found.</returns>
     public async Task<List<Favori>> GetAll() =>
         await ls.GetItemAsync<List<Favori>>(KEY) ?? new();
 
-    // Ajoute un favori avec un Id auto-incrémenté
+    /// <summary>
+    /// Adds a new favorite Pokémon to the list with an auto-incremented ID.
+    /// </summary>
+    /// <param name="f">The favorite Pokémon to add.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
     public async Task Add(Favori f)
     {
         var list = await GetAll();
@@ -25,7 +35,11 @@ public class FavoriService(ILocalStorageService ls)
         await ls.SetItemAsync(KEY, list);
     }
 
-    // Met à jour un favori existant (trouvé par son Id)
+    /// <summary>
+    /// Updates an existing favorite Pokémon in the list.
+    /// </summary>
+    /// <param name="f">The favorite Pokémon to update, identified by its ID.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
     public async Task Update(Favori f)
     {
         var list = await GetAll();
@@ -33,7 +47,11 @@ public class FavoriService(ILocalStorageService ls)
         if (i >= 0) { list[i] = f; await ls.SetItemAsync(KEY, list); }
     }
 
-    // Supprime un favori par son Id
+    /// <summary>
+    /// Deletes a favorite Pokémon from the list by its ID.
+    /// </summary>
+    /// <param name="id">The ID of the favorite Pokémon to delete.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
     public async Task Delete(int id)
     {
         var list = await GetAll();
@@ -41,7 +59,11 @@ public class FavoriService(ILocalStorageService ls)
         await ls.SetItemAsync(KEY, list);
     }
 
-    // Vérifie si un Pokémon est déjà en favori (comparaison insensible à la casse)
+    /// <summary>
+    /// Checks if a Pokémon is already in the favorites list (case-insensitive).
+    /// </summary>
+    /// <param name="nom">The name of the Pokémon to check.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains true if the Pokémon is a favorite; otherwise, false.</returns>
     public async Task<bool> IsFavori(string nom) =>
         (await GetAll()).Any(f => f.NomPokemon.ToLower() == nom.ToLower());
 }

@@ -65,73 +65,91 @@
 </div>
 
 @code {
-    // ── État du composant ──────────────────────────────────────
-    Pokemon? pokemon;
-    string   nom       = "";
-    string   erreur    = "";
-    string   notif     = "";
-    bool     chargement = false;
-    bool     estFavori  = false;
+    // ── Component State ──────────────────────────────────────
+    Pokemon? pokemon; // The currently displayed Pokémon
+    string nom = ""; // The name of the Pokémon to search for
+    string erreur = ""; // Error message to display
+    string notif = ""; // Notification message to display
+    bool chargement = false; // Flag to show a loading indicator
+    bool estFavori = false; // Flag to indicate if the current Pokémon is a favorite
 
-    // --- État pour l'effet machine à écrire ---
-    private string displayedDescription = "";
-    private CancellationTokenSource typewriterCts = new();
-    private bool isTyping = false;
+    // --- State for the typewriter effect ---
+    private string displayedDescription = ""; // The description text displayed with the typewriter effect
+    private CancellationTokenSource typewriterCts = new(); // Cancellation token source for the typewriter effect
+    private bool isTyping = false; // Flag to indicate if the typewriter effect is running
 
-    // ── Traductions anglais → français ────────────────────────
+    // ── English to French translations ────────────────────────
     static readonly Dictionary<string, string> TypeFr = new()
     {
-        ["grass"]="Plante",["fire"]="Feu",["water"]="Eau",["electric"]="Électrique",
-        ["poison"]="Poison",["psychic"]="Psy",["rock"]="Roche",["ground"]="Sol",
-        ["ice"]="Glace",["dragon"]="Dragon",["fairy"]="Fée",["normal"]="Normal",
-        ["fighting"]="Combat",["flying"]="Vol",["bug"]="Insecte",["ghost"]="Spectre",
-        ["dark"]="Ténèbres",["steel"]="Acier"
+        ["grass"] = "Plante", ["fire"] = "Feu", ["water"] = "Eau", ["electric"] = "Électrique",
+        ["poison"] = "Poison", ["psychic"] = "Psy", ["rock"] = "Roche", ["ground"] = "Sol",
+        ["ice"] = "Glace", ["dragon"] = "Dragon", ["fairy"] = "Fée", ["normal"] = "Normal",
+        ["fighting"] = "Combat", ["flying"] = "Vol", ["bug"] = "Insecte", ["ghost"] = "Spectre",
+        ["dark"] = "Ténèbres", ["steel"] = "Acier"
     };
     static readonly Dictionary<string, string> StatFr = new()
     {
-        ["hp"]="PV",["attack"]="ATQ",["defense"]="DEF",
-        ["special-attack"]="ATQ.SP",["special-defense"]="DEF.SP",["speed"]="VIT"
+        ["hp"] = "PV", ["attack"] = "ATQ", ["defense"] = "DEF",
+        ["special-attack"] = "ATQ.SP", ["special-defense"] = "DEF.SP", ["speed"] = "VIT"
     };
 
-    // ── Cycle de vie ───────────────────────────────────────────
+    // ── Lifecycle ───────────────────────────────────────────
+    /// <summary>
+    /// Checks if the user is authenticated when the component is initialized. If not, redirects to the login page.
+    /// </summary>
     protected override async Task OnInitializedAsync()
     {
         if (!await AuthService.IsAuthenticated()) Nav.NavigateTo("/login");
     }
 
+    /// <summary>
+    /// Disposes the cancellation token source for the typewriter effect.
+    /// </summary>
     public void Dispose()
     {
         typewriterCts.Cancel();
         typewriterCts.Dispose();
     }
 
+    /// <summary>
+    /// Handles the keydown event on the search input field to allow searching with the Enter key.
+    /// </summary>
+    /// <param name="e">The keyboard event arguments.</param>
     async Task HandleKey(KeyboardEventArgs e) { if (e.Key == "Enter") await Chercher(); }
 
-    // ── Recherche d'un Pokémon ─────────────────────────────────
+    // ── Pokémon Search ─────────────────────────────────
+    /// <summary>
+    /// Searches for a Pokémon by name.
+    /// </summary>
     async Task Chercher()
     {
         if (string.IsNullOrWhiteSpace(nom)) { erreur = "ENTRE UN NOM !"; return; }
 
         erreur = ""; pokemon = null; chargement = true; StateHasChanged();
 
-        // Annule l'animation de texte précédente
+        // Cancel the previous typewriter animation
         typewriterCts.Cancel();
         typewriterCts.Dispose();
         typewriterCts = new CancellationTokenSource();
 
         pokemon = await PokemonService.GetPokemon(nom.Trim());
-        erreur  = pokemon == null ? "POKÉMON INTROUVABLE." : "";
+        erreur = pokemon == null ? "POKÉMON INTROUVABLE." : "";
 
         if (pokemon != null)
         {
             estFavori = await FavoriService.IsFavori(pokemon.Name);
-            // Démarre la nouvelle animation
+            // Start the new typewriter animation
             _ = StartTypewriterEffect(pokemon.Description, typewriterCts.Token);
         }
 
         chargement = false;
     }
 
+    /// <summary>
+    /// Starts the typewriter effect for the Pokémon's description.
+    /// </summary>
+    /// <param name="fullText">The full description text to display.</param>
+    /// <param name="token">The cancellation token to stop the effect.</param>
     async Task StartTypewriterEffect(string fullText, CancellationToken token)
     {
         displayedDescription = "";
@@ -148,33 +166,38 @@
             }
             displayedDescription += c;
             StateHasChanged();
-            await Task.Delay(30, token); // Vitesse d'écriture
+            await Task.Delay(30, token); // Typing speed
         }
 
         isTyping = false;
         StateHasChanged();
     }
 
-
-    // ── Ajouter / retirer des favoris ─────────────────────────
+    // ── Add/Remove Favorites ─────────────────────────
+    /// <summary>
+    /// Toggles the favorite status of the current Pokémon.
+    /// </summary>
     async Task BasculerFavori()
     {
         if (pokemon == null) return;
 
         if (estFavori)
         {
-            var all  = await FavoriService.GetAll();
-            var fav  = all.FirstOrDefault(f => f.NomPokemon.ToLower() == pokemon.Name.ToLower());
+            var all = await FavoriService.GetAll();
+            var fav = all.FirstOrDefault(f => f.NomPokemon.ToLower() == pokemon.Name.ToLower());
             if (fav != null) await FavoriService.Delete(fav.Id);
-            notif = "RETIRÉ DES FAVORIS"; estFavori = false;
+            notif = "RETIRÉ DES FAVORIS";
+            estFavori = false;
         }
         else
         {
             await FavoriService.Add(new Favori { NomPokemon = pokemon.Name, ImageUrl = pokemon.Sprites.FrontDefault });
-            notif = "AJOUTÉ AUX FAVORIS !"; estFavori = true;
+            notif = "AJOUTÉ AUX FAVORIS !";
+            estFavori = true;
         }
 
         await Task.Delay(2000);
-        notif = ""; StateHasChanged();
+        notif = "";
+        StateHasChanged();
     }
 }

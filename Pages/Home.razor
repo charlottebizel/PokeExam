@@ -20,10 +20,14 @@
 </div>
 
 @code {
-    private const string FullText = "MON POKÉDEX";
-    private string displayedText = "";
-    private CancellationTokenSource cts = new CancellationTokenSource();
+    private const string FullText = "MON POKÉDEX"; // The full text to be displayed with the typewriter effect
+    private string displayedText = ""; // The text currently displayed
+    private CancellationTokenSource cts = new CancellationTokenSource(); // Cancellation token source for the typewriter effect
 
+    /// <summary>
+    /// Checks if the user is authenticated when the component is initialized.
+    /// If not, it redirects to the login page. Otherwise, it starts the typewriter effect.
+    /// </summary>
     protected override async Task OnInitializedAsync()
     {
         if (!await AuthService.IsAuthenticated())
@@ -36,6 +40,10 @@
         }
     }
 
+    /// <summary>
+    /// Starts the typewriter effect to display the full text character by character.
+    /// </summary>
+    /// <param name="token">The cancellation token to stop the effect.</param>
     private async Task StartTypewriterEffect(CancellationToken token)
     {
         foreach (char c in FullText)
@@ -47,6 +55,9 @@
         }
     }
 
+    /// <summary>
+    /// Disposes the cancellation token source to prevent memory leaks.
+    /// </summary>
     public void Dispose()
     {
         cts.Cancel();

@@ -27,18 +27,28 @@
 </div>
 
 @code {
-    string username = "", password = "";
-    bool error = false;
+    string username = ""; // The username entered by the user
+    string password = ""; // The password entered by the user
+    bool error = false; // Flag to show an error message if login fails
 
-    // Permet de valider avec la touche Entrée
+    /// <summary>
+    /// Handles the keydown event on the password input field to allow login with the Enter key.
+    /// </summary>
+    /// <param name="e">The keyboard event arguments.</param>
     async Task HandleKey(KeyboardEventArgs e) { if (e.Key == "Enter") await HandleLogin(); }
 
+    /// <summary>
+    /// Handles the login process when the user clicks the "START" button.
+    /// </summary>
     async Task HandleLogin()
     {
         if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-            { error = true; return; }
+        {
+            error = true; // Show an error message if the username or password are empty
+            return;
+        }
 
-        await AuthService.Login(username, password);
-        Nav.NavigateTo("/pokedex"); // Redirige vers le Pokédex après connexion
+        await AuthService.Login(username, password); // Authenticate the user
+        Nav.NavigateTo("/pokedex"); // Redirect to the Pokédex page after successful login
     }
 }

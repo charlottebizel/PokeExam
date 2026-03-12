@@ -76,35 +76,44 @@
 </div>
 
 @code {
-    List<Favori> favoris = new();   // Liste des favoris chargée depuis localStorage
-    int?   editId          = null;  // Id du favori en cours d'édition (null = aucun)
-    string editCommentaire = "";    // Valeur temporaire du champ commentaire
-    bool   showModal       = false; // Affiche/cache la modale de confirmation
-    int    deleteId        = 0;     // Id du favori à supprimer
+    List<Favori> favoris = new(); // List of favorite Pokémon loaded from local storage
+    int? editId = null; // ID of the favorite being edited (null if none)
+    string editCommentaire = ""; // Temporary value of the comment field
+    bool showModal = false; // Show/hide the confirmation modal
+    int deleteId = 0; // ID of the favorite to be deleted
 
-    // Charge les favoris au démarrage (et redirige si non connecté)
+    /// <summary>
+    /// Loads the favorites when the component is initialized (and redirects if not authenticated).
+    /// </summary>
     protected override async Task OnInitializedAsync()
     {
         if (!await AuthService.IsAuthenticated()) { Nav.NavigateTo("/login"); return; }
         favoris = await FavoriService.GetAll();
     }
 
-    // Ouvre le mode édition pour un favori donné
+    /// <summary>
+    /// Enters edit mode for a given favorite.
+    /// </summary>
+    /// <param name="f">The favorite to edit.</param>
     void StartEdit(Favori f) { editId = f.Id; editCommentaire = f.Commentaire ?? ""; }
 
-    // Sauvegarde le commentaire modifié
+    /// <summary>
+    /// Saves the modified comment.
+    /// </summary>
     async Task SaveEdit()
     {
         var f = favoris.FirstOrDefault(x => x.Id == editId);
         if (f != null) { f.Commentaire = editCommentaire; await FavoriService.Update(f); }
-        editId = null; // Ferme le mode édition
+        editId = null; // Exit edit mode
     }
 
-    // Supprime le favori et rafraîchit la liste
+    /// <summary>
+    /// Deletes the favorite and refreshes the list.
+    /// </summary>
     async Task ExecuteDelete()
     {
         await FavoriService.Delete(deleteId);
         showModal = false;
-        favoris   = await FavoriService.GetAll(); // Recharge la liste
+        favoris = await FavoriService.GetAll(); // Reload the list
     }
 }
