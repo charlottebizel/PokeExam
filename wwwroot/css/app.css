@@ -701,12 +701,15 @@ nav button:hover { background: #3a0000; border-color: #ff4444; color: #ff4444; }
     padding: 30px 20px;
 }
 
-.gb-home h1 {
+.gb-home .gb-home-title {
     font-size: 18px;
-    color: var(--gb-darkest);
+    color: var(--gb-lightest);
+    background: var(--gb-darkest);
     margin-bottom: 16px;
     letter-spacing: 2px;
     animation: gb-blink 2s step-end infinite;
+    padding: 12px;
+    border: 3px solid var(--gb-dark);
 }
 
 .gb-home p {

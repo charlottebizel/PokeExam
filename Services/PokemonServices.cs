@@ -1,6 +1,6 @@
 // ┌──────────────────────────────────────────────────────────────┐
 // │  PokemonService — Appels à PokéAPI (https://pokeapi.co)      │
-// │  GetFromJsonAsync<T> : fait le GET + désérialise en une ligne │
+// │  GetFromJsonAsync<T> : fait le GET + désérialise en une ligne│
 // └──────────────────────────────────────────────────────────────┘
 using System.Net.Http.Json;
 using PokeBlazor.Models;
@@ -13,7 +13,7 @@ namespace PokeBlazor.Services;
 public class PokemonService(HttpClient http)
 {
     // Dictionnaire français → anglais pour la recherche
-    // (PokéAPI n'accepte que les noms anglais dans l'URL)
+    // (parceque PokéAPI n'accepte que les noms anglais dans l'URL)
     static readonly Dictionary<string, string> FrToEn = new()
     {
         ["bulbizarre"] = "bulbasaur",
@@ -122,7 +122,7 @@ public class PokemonService(HttpClient http)
         ["osselait"] = "cubone",
         ["ossatueur"] = "marowak",
         ["kicklee"] = "hitmonlee",
-        ["tygnon"] =. "hitmonchan",
+        ["tygnon"] = "hitmonchan",
         ["excelangue"] = "lickitung",
         ["smogo"] = "koffing",
         ["smogogo"] = "weezing",

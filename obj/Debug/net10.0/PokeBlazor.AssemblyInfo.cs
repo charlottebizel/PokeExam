@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PokeBlazor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b7d8b9b61f917b7b9e77d38aed38e36d1a14593")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eccdd319b6ff0eeac1ad1001475bbf3b1ab75b06")]
 [assembly: System.Reflection.AssemblyProductAttribute("PokeBlazor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PokeBlazor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
