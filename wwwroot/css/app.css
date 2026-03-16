@@ -674,6 +674,17 @@ nav button:hover { background: #3a0000; border-color: #ff4444; color: #ff4444; }
 
 .gb-login-btn:hover { background: var(--gb-dark); }
 
+.gb-btn-secondary {
+    width: 100%;
+    margin-top: 12px;
+    background: transparent;
+    color: var(--gb-dark);
+    border: none;
+    box-shadow: none;
+    text-decoration: underline;
+    font-size: 8px;
+}
+
 /* ── TOP ROW ──────────────────────────────────────────────── */
 .top-row {
     background: var(--gb-darkest);
@@ -683,6 +694,7 @@ nav button:hover { background: #3a0000; border-color: #ff4444; color: #ff4444; }
     justify-content: flex-end;
     align-items: center;
     min-height: 40px;
+    gap: 20px;
 }
 
 .top-row a {
@@ -694,6 +706,14 @@ nav button:hover { background: #3a0000; border-color: #ff4444; color: #ff4444; }
 }
 
 .top-row a:hover { color: var(--gb-light); }
+
+.username-display {
+    font-family: var(--gb-pixel);
+    font-size: 8px;
+    color: var(--gb-lightest);
+    letter-spacing: 1px;
+    margin-right: auto; /* Pousse le nom d'utilisateur à gauche */
+}
 
 /* ── HOME PAGE ────────────────────────────────────────────── */
 .gb-home {

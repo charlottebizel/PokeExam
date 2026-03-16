@@ -1,4 +1,4 @@
-@* ── Page de connexion ────────────────────────────────────────
+@* ── Page de connexion / Inscription ──────────────────────────
    Layout vide (EmptyLayout) : pas de sidebar sur cette page
    @bind relie la variable C# à la valeur de l'input (2 sens)  *@
 @page "/login"
@@ -9,7 +9,10 @@
 <div class="gb-login-wrapper">
     <div class="gb-login-box">
         <h1 class="gb-login-title">POKÉEXAM</h1>
-        <p class="gb-login-sub">▶ APPUIE SUR START</p>
+        <p class="gb-login-sub">
+            @if (isRegisterMode) {<text>▶ CRÉE UN COMPTE</text>}
+            else {<text>▶ APPUIE SUR START</text>}
+        </p>
 
         <div class="gb-form-group">
             <label class="gb-label">DRESSEUR :</label>
@@ -20,35 +23,93 @@
             <input class="gb-input" type="password" @bind="password" @onkeydown="HandleKey" placeholder="••••••••" />
         </div>
 
-        @if (error) { <div class="gb-error">⚠ REMPLIS LES CHAMPS !</div> }
+        @if (isRegisterMode)
+        {
+            <div class="gb-form-group">
+                <label class="gb-label">CONFIRMER :</label>
+                <input class="gb-input" type="password" @bind="confirmPassword" @onkeydown="HandleKey" placeholder="••••••••" />
+            </div>
+        }
 
-        <button class="gb-btn gb-login-btn" @onclick="HandleLogin">▶ START</button>
+        @if (!string.IsNullOrEmpty(errorMessage)) { <div class="gb-error">⚠ @errorMessage</div> }
+
+        <button class="gb-btn gb-login-btn" @onclick="HandleSubmit">
+            @if (isRegisterMode) {<text>▶ CRÉER</text>}
+            else {<text>▶ START</text>}
+        </button>
+
+        <button class="gb-btn gb-btn-secondary" @onclick="ToggleMode">
+            @if (isRegisterMode) {<text>J'ai déjà un compte</text>}
+            else {<text>Créer un compte</text>}
+        </button>
     </div>
 </div>
 
 @code {
-    string username = ""; // The username entered by the user
-    string password = ""; // The password entered by the user
-    bool error = false; // Flag to show an error message if login fails
+    string username = "";
+    string password = "";
+    string confirmPassword = "";
+    string? errorMessage = null;
+    bool isRegisterMode = false;
 
     /// <summary>
-    /// Handles the keydown event on the password input field to allow login with the Enter key.
+    /// Handles the keydown event on the input fields to allow submission with the Enter key.
     /// </summary>
-    /// <param name="e">The keyboard event arguments.</param>
-    async Task HandleKey(KeyboardEventArgs e) { if (e.Key == "Enter") await HandleLogin(); }
+    async Task HandleKey(KeyboardEventArgs e) { if (e.Key == "Enter") await HandleSubmit(); }
 
     /// <summary>
-    /// Handles the login process when the user clicks the "START" button.
+    /// Toggles between login and registration mode.
     /// </summary>
-    async Task HandleLogin()
+    void ToggleMode()
     {
+        isRegisterMode = !isRegisterMode;
+        errorMessage = null;
+    }
+
+    /// <summary>
+    /// Handles the form submission for both login and registration.
+    /// </summary>
+    async Task HandleSubmit()
+    {
+        errorMessage = null;
+
         if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
         {
-            error = true; // Show an error message if the username or password are empty
+            errorMessage = "REMPLIS LES CHAMPS !";
             return;
         }
 
-        await AuthService.Login(username, password); // Authenticate the user
-        Nav.NavigateTo("/pokedex"); // Redirect to the Pokédex page after successful login
+        if (isRegisterMode)
+        {
+            if (password != confirmPassword)
+            {
+                errorMessage = "LES MOTS DE PASSE NE CORRESPONDENT PAS !";
+                return;
+            }
+
+            var success = await AuthService.Register(username, password);
+            if (success)
+            {
+                // Optionally log the user in directly after registration
+                await AuthService.Login(username, password);
+                Nav.NavigateTo("/pokedex");
+            }
+            else
+            {
+                errorMessage = "CE NOM DE DRESSEUR EST DÉJÀ PRIS !";
+            }
+        }
+        else
+        {
+            var success = await AuthService.Login(username, password);
+            if (success)
+            {
+                Nav.NavigateTo("/pokedex");
+            }
+            else
+            {
+                errorMessage = "NOM DE DRESSEUR OU MOT DE PASSE INCORRECT !";
+            }
+        }
     }
 }

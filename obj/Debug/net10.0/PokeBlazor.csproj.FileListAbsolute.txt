@@ -208,9 +208,6 @@ C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\dotnet.runt
 C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\icudt_CJK.tjcz0u77k5.dat
 C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\icudt_EFIGS.tptq2av103.dat
 C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\icudt_no_CJK.lfu7j35m59.dat
-C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\PokeBlazor.2sx21bbzw5.wasm
-C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\PokeBlazor.val4nkcp4f.pdb
-C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\dotnet.akf2xz40ci.js
 C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\blazor.webassembly.66stpp682q.js.gz
 C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\Blazored.LocalStorage.rtee5ama0k.wasm.gz
 C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\Microsoft.AspNetCore.Authorization.3ur142rhlk.wasm.gz
@@ -420,9 +417,6 @@ C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\dotnet.runt
 C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\icudt_CJK.tjcz0u77k5.dat.gz
 C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\icudt_EFIGS.tptq2av103.dat.gz
 C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\icudt_no_CJK.lfu7j35m59.dat.gz
-C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\PokeBlazor.2sx21bbzw5.wasm.gz
-C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\PokeBlazor.val4nkcp4f.pdb.gz
-C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\dotnet.akf2xz40ci.js.gz
 C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\PokeBlazor.staticwebassets.runtime.json
 C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\PokeBlazor.staticwebassets.endpoints.json
 C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\PokeBlazor.dll
@@ -855,7 +849,6 @@ C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\PokeBlazor.genruntimeconfig.ca
 C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\blazor.build.boot-extension.json
 C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\dotnet.js
 C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\compressed\f9o902iofb-{0}-99zm1jdh75-99zm1jdh75.gz
-C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\compressed\7g4iby7878-{0}-0jh9bjhfd9-0jh9bjhfd9.gz
 C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\compressed\glx6wzcsje-{0}-9awl67xiu6-9awl67xiu6.gz
 C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\compressed\x2uknsidfn-{0}-vx1avdmzld-vx1avdmzld.gz
 C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\compressed\nt3cs8tc0c-{0}-fn6bqp9sid-fn6bqp9sid.gz
@@ -1113,9 +1106,6 @@ C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\compressed\yo1mou7eyg-{0}-y1cs
 C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\compressed\9ahav6wr66-{0}-tjcz0u77k5-tjcz0u77k5.gz
 C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\compressed\4x8zslowj4-{0}-tptq2av103-tptq2av103.gz
 C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\compressed\kq03w4ymps-{0}-lfu7j35m59-lfu7j35m59.gz
-C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\compressed\ntap59pijl-{0}-2sx21bbzw5-2sx21bbzw5.gz
-C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\compressed\j1a2bt3ql6-{0}-val4nkcp4f-val4nkcp4f.gz
-C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\compressed\hm3co0vh2d-{0}-akf2xz40ci-akf2xz40ci.gz
 C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\staticwebassets.build.json
 C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\staticwebassets.build.json.cache
 C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\staticwebassets.development.json
@@ -1126,3 +1116,13 @@ C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\PokeBlazor.dll
 C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\refint\PokeBlazor.dll
 C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\PokeBlazor.pdb
 C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\ref\PokeBlazor.dll
+C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\PokeBlazor.joikqhd023.wasm
+C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\PokeBlazor.2v141scafe.pdb
+C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\dotnet.ezn5m9938p.js
+C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\PokeBlazor.joikqhd023.wasm.gz
+C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\PokeBlazor.2v141scafe.pdb.gz
+C:\Users\bizel\Desktop\PokeExam\bin\Debug\net10.0\wwwroot\_framework\dotnet.ezn5m9938p.js.gz
+C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\compressed\7g4iby7878-{0}-06436kafrf-06436kafrf.gz
+C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\compressed\ntap59pijl-{0}-joikqhd023-joikqhd023.gz
+C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\compressed\j1a2bt3ql6-{0}-2v141scafe-2v141scafe.gz
+C:\Users\bizel\Desktop\PokeExam\obj\Debug\net10.0\compressed\hm3co0vh2d-{0}-ezn5m9938p-ezn5m9938p.gz

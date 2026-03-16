@@ -1,6 +1,11 @@
 @inherits LayoutComponentBase
+@inject AuthService AuthService
 
 <div class="top-row px-4">
+    @if (username != null)
+    {
+        <span class="username-display">DRESSEUR: @username</span>
+    }
     <a href="https://pokeapi.co" target="_blank">POKEAPI ▶</a>
 </div>
 
@@ -15,3 +20,12 @@
         </article>
     </main>
 </div>
+
+@code {
+    private string? username;
+
+    protected override async Task OnInitializedAsync()
+    {
+        username = await AuthService.GetCurrentUsername();
+    }
+}

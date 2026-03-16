@@ -5,7 +5,7 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
   "mainAssemblyName": "PokeBlazor",
   "applicationEnvironment": "Development",
   "resources": {
-    "hash": "sha256-IM+eOD6y9tW9xhWexsuBn9uxyRMKK9xI5LGhGG28Zvo=",
+    "hash": "sha256-pIojROG7I58wJ6+lU1C+pVRKQtYXok4SK3JAg8Qaw4o=",
     "jsModuleNative": [
       {
         "name": "dotnet.native.ykrnppwhq2.js"
@@ -1248,16 +1248,16 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
       },
       {
         "virtualPath": "PokeBlazor.wasm",
-        "name": "PokeBlazor.2sx21bbzw5.wasm",
-        "integrity": "sha256-gjSNq9JNnJ1F8LznqFQg5y/Vb3EoD0twiK5P8DpuHrk=",
+        "name": "PokeBlazor.joikqhd023.wasm",
+        "integrity": "sha256-k6l/O4jB1ylyISqXx+iCYJNjN/J58UtJNGshDhRbY6M=",
         "cache": "force-cache"
       }
     ],
     "pdb": [
       {
         "virtualPath": "PokeBlazor.pdb",
-        "name": "PokeBlazor.val4nkcp4f.pdb",
-        "integrity": "sha256-14u+5hE2CqYSammPiftQ8rwuWhvwrsZwmFHSTnLykF8=",
+        "name": "PokeBlazor.2v141scafe.pdb",
+        "integrity": "sha256-kkzPK/HSc1GDHlJ9uF0vPZ6AhPGATVD8tLatqcmaUkM=",
         "cache": "force-cache"
       }
     ],
