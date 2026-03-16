@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xunit;
 
 namespace PokeBlazor.Tests
@@ -27,9 +27,9 @@ namespace PokeBlazor.Tests
         }
 
         [Fact]
-        public void Test_Exception_IsThrown()
+        public async System.Threading.Tasks.Task Test_Exception_IsThrown()
         {
-            Assert.Throws<ArgumentNullException>(() => throw new ArgumentNullException()); // Vérifie qu'une exception est bien levée
+            await Assert.ThrowsAsync<ArgumentNullException>(() => System.Threading.Tasks.Task.Run(() => throw new ArgumentNullException()));
         }
 
         [Theory]
