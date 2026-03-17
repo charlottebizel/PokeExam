@@ -5,13 +5,23 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokéexam</title>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <base href="./" />
+
+    <!-- Base href -->
+    <!-- LOCAL : <base href="/" /> -->
+    <!-- GITHUB PAGES : <base href="/PokeExam/" /> -->
+    <base href="/Pokeexam/" />
+
+    <!-- CSS -->
     <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/PokeBlazor.styles.css" />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="pokeball.jpg" />
-    <link href="css/PokeBlazor.styles.css" rel="stylesheet" />
 
     <style>
         /* Styles pour l'écran de chargement initial */
@@ -23,7 +33,7 @@
         }
 
         #app {
-            background-color: #C4CFA1; /* --gb-lightest from app.css */
+            background-color: #C4CFA1; /* Couleur principale */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -36,14 +46,14 @@
         }
 
         .loader-text {
-            color: #4D533C; /* --gb-dark from app.css */
+            color: #4D533C;
             font-size: 10px;
             letter-spacing: 2px;
             margin-top: 20px;
         }
-        
+
         .loader-img {
-            width: 120px; /* Taille ajustée pour la pokeball */
+            width: 120px;
             height: 120px;
             animation: pulse 2s infinite ease-in-out;
         }
@@ -57,17 +67,20 @@
 </head>
 
 <body>
+    <!-- Loading screen -->
     <div id="app">
         <img src="images/pokeball.svg" alt="Loading..." class="loader-img" />
         <div class="loader-text">LOADING...</div>
     </div>
 
+    <!-- Blazor error UI -->
     <div id="blazor-error-ui">
         An unhandled error has occurred.
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
 
+    <!-- Blazor WebAssembly JS -->
     <script src="_framework/blazor.webassembly.js"></script>
 </body>
 

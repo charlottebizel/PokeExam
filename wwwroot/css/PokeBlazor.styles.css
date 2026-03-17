@@ -1,0 +1,28 @@
+/* Styles spécifiques pour PokeBlazor */
+
+/* Loader spécial */
+.gb-loader-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background: var(--gb-lightest);
+}
+
+/* Animation du texte pendant le chargement */
+.gb-loader-text {
+    font-family: var(--gb-pixel);
+    color: var(--gb-darkest);
+    font-size: 12px;
+    letter-spacing: 2px;
+    animation: gb-blink 1s step-end infinite;
+}
+
+/* Cards Pokémon spécifiques à ce composant */
+.gb-poke-card-custom {
+    border: 4px solid var(--gb-dark);
+    box-shadow: 4px 4px 0 var(--gb-shadow);
+    padding: 12px;
+    margin-bottom: 12px;
+    background: var(--gb-light);
+}
